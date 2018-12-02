@@ -1,0 +1,7 @@
+<Files  ~ "\.json$">
+	Order allow,deny
+	Deny from all
+</Files>
+
+RewriteEngine on
+RewriteRule . index.php [L]
