@@ -51,7 +51,7 @@ switch($uri)
     }
     default:
     {
-        echo 'ok';
+        echo 'ok : '.$bot_token. ' : '.$app_name;
     }
 }
 function request()
