@@ -10,11 +10,13 @@ switch($uri)
     case '/'.$bot_token:
     {
         $result = request();
+        $telegram = new telegram($bot_token);
         $telegram->parse($result);
         break;
     }
     case '/getWebhook':
     {
+        $telegram = new telegram($bot_token);
         $result = $telegram->getWebhookInfo();
         dump($result);
         break;
@@ -25,16 +27,17 @@ switch($uri)
         $params = array(
             'url' => $bot_webhook
         );
+        $telegram = new telegram($bot_token);
         $result = $telegram->setWebhook($params);
         dump($result);
         break;
     }
     case '/unsetWebhook':
     {
-        $method = 'setWebhook';
         $params = array(
             'url' => null
         );
+        $telegram = new telegram($bot_token);
         $result = $telegram->setWebhook($params);
         dump($result);
         break;
