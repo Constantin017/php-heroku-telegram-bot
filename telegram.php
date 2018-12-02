@@ -20,8 +20,10 @@ class telegram
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
         curl_setopt($handle, CURLOPT_POST, true);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($params));
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        if (!empty($params)){
+            curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($params));
+            curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        }
         $response = curl_exec($handle);
 
         return ($response) ? json_decode($response, true) : false;
