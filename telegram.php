@@ -2,11 +2,10 @@
 class telegram
 {
     private $uri = 'https://api.telegram.org/bot';
-    private $bot_token;
 
     public function __construct($bot_token)
     {
-        $this->bot_token = $bot_token;
+        $this->uri .= $bot_token;
     }
 
     public function __call($name, $args)
@@ -16,7 +15,7 @@ class telegram
 
     public function call($method, $params = array())
     {
-        $handle = curl_init($this->uri.$this->bot_token);
+        $handle = curl_init($this->uri);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
