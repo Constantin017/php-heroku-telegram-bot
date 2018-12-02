@@ -14,6 +14,13 @@ switch($uri)
         $telegram->parse($result);
         break;
     }
+    case '/getMe':
+    {
+        $telegram = new telegram($bot_token);
+        $result = $telegram->getMe();
+        dump($result);
+        break;
+    }
     case '/getWebhook':
     {
         $telegram = new telegram($bot_token);
