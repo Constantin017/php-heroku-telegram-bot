@@ -31,11 +31,7 @@ switch($uri)
     case '/setWebhook':
     {
         $bot_webhook = "https://" . $app_name . '.herokuapp.com/' . $bot_token;
-        $params = array(
-            'url' => $bot_webhook
-        );
-        $telegram = new telegram($bot_token);
-        $result = $telegram->setWebhook($params);
+        $result = file_get_contents($telegram->uri . '/setWebhook?url=' . $bot_webhook);
         dump($result);
         break;
     }
