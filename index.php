@@ -11,21 +11,20 @@ switch($uri)
 {
     case '/'.$bot_token:
     {
-        $result = request();
-        $telegram = new telegram($bot_token);
-        $telegram->parse($result);
+        $telegram = new TelegramBot($bot_token);
+        $telegram->request();
         break;
     }
     case '/getMe':
     {
-        $telegram = new telegram($bot_token);
+        $telegram = new TelegramBot($bot_token);
         $result = $telegram->getMe();
         dump($result);
         break;
     }
     case '/getWebhook':
     {
-        $telegram = new telegram($bot_token);
+        $telegram = new TelegramBot($bot_token);
         $result = $telegram->getWebhookInfo();
         dump($result);
         break;
@@ -43,7 +42,7 @@ switch($uri)
         $params = array(
             'url' => null
         );
-        $telegram = new telegram($bot_token);
+        $telegram = new TelegramBot($bot_token);
         $result = $telegram->setWebhook($params);
         dump($result);
         break;
@@ -53,14 +52,7 @@ switch($uri)
         echo 'ok';
     }
 }
-function request()
-{
-	$postdata = file_get_contents("php://input");
-	$json = json_decode($postdata, true);
-	if($json)
-		return $json;
-	return $postdata;
-}
+
 function dump($var){
     echo "<pre>";
     print_r($var);

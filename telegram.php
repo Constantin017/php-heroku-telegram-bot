@@ -1,7 +1,8 @@
 <?php
-class telegram
+class TelegramBot
 {
     private $uri = 'https://api.telegram.org/bot';
+    private $debug = true;
 
     public function __construct($bot_token)
     {
@@ -28,4 +29,92 @@ class telegram
         return ($response) ? json_decode($response, true) : false;
     }
 
+
+    public function request()
+    {
+        $postdata = file_get_contents("php://input");
+        $update = json_decode($postdata, true);
+
+        if ($update && isset($update["message"])) {
+        
+            $message = $update['message'];
+            $message_id = $message['message_id'];
+            $from = $message['from'];
+            $from_id = $from['id'];
+            $text = $message['text'];
+            $chat = $message['chat'];
+            $chat_id = $chat['id'];
+
+            if ($from_id !== $chat_id){
+                $this->sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => 'Working only on private chat with user'
+                ]);
+                exit();
+            }
+
+            switch($text)
+            {
+                case '/unixtime':
+                {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => time()
+                    ]);
+                    break;
+                }
+                case '/message_id':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $message_id
+                    ]);
+                    break;
+                }
+                case '/user_id':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $user_id
+                    ]);
+                    break;
+                }
+                case '/chat_id':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $chat_id
+                    ]);
+                    break;
+                }
+                case '/ping':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => 'pong'
+                    ]);
+                    break;
+                }
+                case '/pong':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => 'ping'
+                    ]);
+                    break;
+                }
+                default:
+                {
+                    if ($this->$debug){
+                        $this->sendMessage([
+                            'chat_id' => $chat_id,
+                            'text' => $chat_id
+                        ]);
+                    }
+                    break;
+                }
+            }
+        }
+
+    }
 }
