@@ -15,14 +15,14 @@ class telegram
 
     public function call($method, $params = array())
     {
-        $handle = curl_init($this->uri);
-        curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
+        $handle = curl_init($this->uri.'/'.$method);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
         curl_setopt($handle, CURLOPT_POST, true);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($params));
-
+        curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        
         $response = curl_exec($handle);
 
         return ($response) ? json_decode($response, true) : false;
