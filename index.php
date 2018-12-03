@@ -18,38 +18,50 @@ switch($uri)
     }
     case '/getMe':
     {
-        $telegram = new TelegramBot($bot_token);
-        $result = $telegram->getMe();
-        dump($result);
+        if ( app::access($bot_token) ){
+            $telegram = new TelegramBot($bot_token);
+            $result = $telegram->getMe();
+            app::dump($result);
+        }
         break;
     }
     case '/getWebhook':
     {
-        $telegram = new TelegramBot($bot_token);
-        $result = $telegram->getWebhookInfo();
-        dump($result);
+        if ( app::access($bot_token) ){
+            $telegram = new TelegramBot($bot_token);
+            $result = $telegram->getWebhookInfo();
+            app::dump($result);
+        }
         break;
     }
     case '/setWebhook':
     {
-        $bot_webhook = "https://" . $app_name . '.herokuapp.com/' . $bot_token;
-        $telegram_url = TELEGRAM_BOT_API_URI.$bot_token;
-        $result = file_get_contents($telegram_url.'/setWebhook?url=' . $bot_webhook);
-        dump($result);
+        if ( app::access($bot_token) ){
+            $bot_webhook = "https://" . $app_name . '.herokuapp.com/' . $bot_token;
+            $telegram_url = TELEGRAM_BOT_API_URI.$bot_token;
+            $result = file_get_contents($telegram_url.'/setWebhook?url=' . $bot_webhook);
+            app::dump($result);
+        }
         break;
     }
     case '/unsetWebhook':
     {
-        $params = array(
-            'url' => null
-        );
-        $telegram = new TelegramBot($bot_token);
-        $result = $telegram->setWebhook($params);
-        dump($result);
+        if ( app::access($bot_token) ){
+            $params = array(
+                'url' => null
+            );
+            $telegram = new TelegramBot($bot_token);
+            $result = $telegram->setWebhook($params);
+            app::dump($result);
+        }
         break;
     }
     default:
     {
-        echo 'ok';
+        if ( app::access($bot_token) ){
+            echo 'ACCESS GRANTED';
+        } else {
+            echo 'ok';
+        }
     }
 }
