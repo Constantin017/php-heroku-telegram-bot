@@ -1,6 +1,8 @@
 <?php
 require 'telegram.php';
 
+define('TELEGRAM_BOT_API_URI', 'https://api.telegram.org/bot');
+
 $bot_token = getenv('TELEGRAM_BOT_TOKEN');
 $app_name = getenv('HEROKU_APP_NAME');
 
@@ -31,7 +33,8 @@ switch($uri)
     case '/setWebhook':
     {
         $bot_webhook = "https://" . $app_name . '.herokuapp.com/' . $bot_token;
-        $result = file_get_contents($telegram->uri . '/setWebhook?url=' . $bot_webhook);
+        $telegram_url = TELEGRAM_BOT_API_URI.$bot_token;
+        $result = file_get_contents($telegram_url.'/setWebhook?url=' . $bot_webhook);
         dump($result);
         break;
     }
