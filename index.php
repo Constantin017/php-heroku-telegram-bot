@@ -1,4 +1,5 @@
 <?php
+require 'app.php';
 require 'telegram.php';
 
 define('TELEGRAM_BOT_API_URI', 'https://api.telegram.org/bot');
@@ -51,10 +52,4 @@ switch($uri)
     {
         echo 'ok';
     }
-}
-
-function dump($var){
-    echo "<pre>";
-    print_r($var);
-    echo "</pre>";
 }
