@@ -13,3 +13,6 @@ php-heroku-telegram-bot
 [link-author]: https://github.com/Constantin017
 [link-repo]: https://github.com/Constantin017/php-heroku-telegram-bot
 [link-issues]: https://github.com/Constantin017/php-heroku-telegram-bot/issues
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FConstantin017%2Fphp-heroku-telegram-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FConstantin017%2Fphp-heroku-telegram-bot?ref=badge_large)
