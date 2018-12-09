@@ -5,10 +5,13 @@ php-heroku-telegram-bot
 
 - [x] github.com account ?
 - [x] heroku.com account ?
+- [x] telegram account ?
 - [x] lovely code editor or IDE ? (vscode, sublime, atom, etc.)
 
 ## Tasks
 
+- [x] Clone git repo.
+- [x] Create heroku app.
 - [x] Create bot from [@BotFather][link-botfather]
 - [x] Set my logo as bot pic from [@BotFather][link-botfather]
 - [ ] Write about from [@BotFather][link-botfather]
