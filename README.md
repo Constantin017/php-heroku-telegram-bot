@@ -5,8 +5,18 @@ php-heroku-telegram-bot
 
 - [ ] Write description
 - [ ] Write how to use this app
-- [ ] Describe awaible TelegramBot commands
+- [ ] Describe available TelegramBot commands
 - [ ] Maybe some licensing ?
+
+## Available TelegramBot commands
+
+- /unixtime - The Current Unix Timestamp
+- /message_id - Current ID from TelegramBotAPI
+- /user_id - Who call your bot
+- /chat_id - ID of chat where your bot is called
+- /ping - Just for fun send pong
+- /pong - Just for fun send ping
+
 
 © 2018 [Constantin017][link-author], All rights reserved.
 
