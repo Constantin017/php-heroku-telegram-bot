@@ -11,8 +11,8 @@ php-heroku-telegram-bot
 ## Available TelegramBot commands
 
 - /unixtime - The Current Unix Timestamp
-- /message_id - Current ID from TelegramBotAPI
-- /user_id - Who call your bot
+- /message_id - Current Message ID from TelegramBotAPI
+- /user_id - ID of user who call your bot
 - /chat_id - ID of chat where your bot is called
 - /ping - Just for fun send pong
 - /pong - Just for fun send ping
