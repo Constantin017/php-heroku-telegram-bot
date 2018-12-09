@@ -5,7 +5,7 @@ php-heroku-telegram-bot
 
 - [ ] Write description
 - [ ] Write how to use this app
-- [ ] Describe available TelegramBot commands
+- [x] Describe available TelegramBot commands
 - [ ] Maybe some licensing ?
 
 ## Available TelegramBot commands
