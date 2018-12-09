@@ -1,9 +1,18 @@
 php-heroku-telegram-bot
 =======================
 
+## First of all
+
+- [x] github.com account ?
+- [x] heroku.com account ?
+- [x] lovely code editor or IDE ? (vscode, sublime, atom, etc.)
+
 ## Tasks
 
-- [ ] Write description
+- [x] Create bot from [@BotFather][link-botfather]
+- [x] Set my logo as bot pic from [@BotFather][link-botfather]
+- [ ] Write about from [@BotFather][link-botfather]
+- [ ] Write description from [@BotFather][link-botfather]
 - [ ] Write how to use this app
 - [x] Describe available TelegramBot commands
 - [ ] Maybe some licensing ?
@@ -20,6 +29,7 @@ php-heroku-telegram-bot
 
 © 2018 [Constantin017][link-author], All rights reserved.
 
+[link-botfather]: https://telegram.me/BotFather
 [link-author]: https://github.com/Constantin017
 [link-repo]: https://github.com/Constantin017/php-heroku-telegram-bot
 [link-issues]: https://github.com/Constantin017/php-heroku-telegram-bot/issues
