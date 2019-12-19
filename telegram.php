@@ -45,7 +45,7 @@ class TelegramBot
             $chat = $message['chat'];
             $chat_id = $chat['id'];
 
-            if ($from_id !== $chat_id){
+            if (false && $from_id !== $chat_id){
                 $this->sendMessage([
                     'chat_id' => $chat_id,
                     'text' => 'Working only on private chat with user'
