@@ -75,7 +75,7 @@ class TelegramBot
                 {   
                     $this->sendMessage([
                         'chat_id' => $chat_id,
-                        'text' => $user_id
+                        'text' => $from_id
                     ]);
                     break;
                 }
