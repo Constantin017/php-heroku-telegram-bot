@@ -31,7 +31,12 @@ class TelegramBot
         return ($response) ? json_decode($response, true) : false;
     }
 
-    private function filterText(string $text)
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function filterText(string $text)
     {
         return str_replace("@".$this->name, "", $text);
     }
@@ -73,10 +78,19 @@ class TelegramBot
             $chat = $message['chat'];
             $chat_id = $chat['id'];
 
-            $text = $this->filterText($message['text']);
+            // $text = $this->filterText($message['text']);
+            $text = str_replace("@php_heroku_telegram_bot", "", $message['text']);
 
             switch($text)
             {
+                case "/name":
+                {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $this->getName()
+                    ]);
+                    break;
+                }
                 case '/whoami':
                 {
                     $_text = "Your ID: ".$user_id;
