@@ -33,7 +33,7 @@ class TelegramBot
 
     private function filterText(string $text)
     {
-        return str_replace($this->name, '', $text);
+        return str_replace('@'.$this->name, '', $text);
     }
 
     private function request()
@@ -125,7 +125,7 @@ class TelegramBot
                 }
                 case '/chat_id':
                 {
-                    if ( $this->isAdmin($from_id) ) {
+                    if ( $this->isAdmin($user_id) ) {
                         $this->sendMessage([
                             'chat_id' => $chat_id,
                             'text' => $chat_id
