@@ -33,7 +33,7 @@ class TelegramBot
 
     private function filterText(string $text)
     {
-        return str_replace('@'.$this->name, '', $text);
+        return str_replace("@".$this->name, "", $text);
     }
 
     private function request()
@@ -53,11 +53,6 @@ class TelegramBot
             return ( in_array($user_id, $this->admin_list) ) ? true : false;
         }
         return true;
-    }
-
-    public function accessGroup()
-    {
-        return ( !empty($this->admin_list) ) ? true : false;
     }
 
     public function serve()
