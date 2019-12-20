@@ -51,9 +51,13 @@ class TelegramBot
         $this->admin_list = explode(';', $admin_list);
     }
 
-    public function isAdmin($from_id)
+    public function isAdmin($user_id)
     {
-        return ( in_array($from_id, $this->admin_list) ) ? true : false;
+        if ( !empty($this->admin_list) )
+        {
+            return ( in_array($user_id, $this->admin_list) ) ? true : false;
+        }
+        return true;
     }
 
     public function accessGroup()
