@@ -56,7 +56,7 @@ if ( app::access() ){
         }
         default:
         {
-            echo 'ACCESS GRANTED';
+            exit("ACCESS GRANTED");
         }
     } // switch
 
