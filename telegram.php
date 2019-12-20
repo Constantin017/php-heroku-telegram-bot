@@ -2,11 +2,13 @@
 class TelegramBot
 {
     private $uri = 'https://api.telegram.org/bot';
-    private $debug = true;
+    private $name = '';
+    private $admin_list = [];
 
-    public function __construct($bot_token)
+    public function __construct($bot_token, $bot_name)
     {
         $this->uri = $this->uri . $bot_token;
+        $this->name = $bot_name;
     }
 
     public function __call($name, $args)
@@ -29,34 +31,75 @@ class TelegramBot
         return ($response) ? json_decode($response, true) : false;
     }
 
-
-    public function request()
+    private function filterText(string $text)
     {
-        $postdata = file_get_contents("php://input");
-        $update = json_decode($postdata, true);
+        return str_replace($this->name, '', $text);
+    }
+
+    private function request()
+    {
+        return json_decode(file_get_contents("php://input"), true);
+    }
+
+    private function isPrivateChat($from_id, $chat_id)
+    {
+        return ( $from_id === $chat_id  ) ? true : false;
+    }
+
+    public function setAdmins(string $admin_list)
+    {
+        $this->admin_list = explode(';', $admin_list);
+    }
+
+    public function isAdmin($from_id)
+    {
+        return ( in_array($from_id, $this->admin_list) ) ? true : false;
+    }
+
+    public function accessGroup()
+    {
+        return ( !empty($this->admin_list) ) ? true : false;
+    }
+
+    public function serve()
+    {
+
+        $update = $this->request();
 
         if ($update && isset($update["message"])) {
         
             $message = $update['message'];
+            
             $message_id = $message['message_id'];
+            
             $from = $message['from'];
             $from_id = $from['id'];
-            $text = $message['text'];
+            $user_id = $from['id'];
+
             $chat = $message['chat'];
             $chat_id = $chat['id'];
-            
-            $text = str_replace('@php_heroku_telegram_bot', '', $text);
 
-            if (false && $from_id !== $chat_id){
+            if ( $this->accessGroup() )
+            {
                 $this->sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => 'Working only on private chat with user'
+                    'text' => 'Working only on private chat.'
                 ]);
                 exit();
             }
 
+            $text = $this->filterText($message['text']);
+
             switch($text)
             {
+                case '/whoami':
+                {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $from
+                    ]);
+                    break;
+                }
                 case '/unixtime':
                 {
                     $this->sendMessage([
@@ -77,16 +120,26 @@ class TelegramBot
                 {   
                     $this->sendMessage([
                         'chat_id' => $chat_id,
+                        'text' => $user_id
+                    ]);
+                    break;
+                }
+                case '/from_id':
+                {   
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
                         'text' => $from_id
                     ]);
                     break;
                 }
                 case '/chat_id':
-                {   
-                    $this->sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => $chat_id
-                    ]);
+                {
+                    if ( $this->isAdmin($from_id) ) {
+                        $this->sendMessage([
+                            'chat_id' => $chat_id,
+                            'text' => $chat_id
+                        ]);
+                    }
                     break;
                 }
                 case '/ping':
@@ -107,12 +160,6 @@ class TelegramBot
                 }
                 default:
                 {
-                    if ($this->$debug){
-                        $this->sendMessage([
-                            'chat_id' => $chat_id,
-                            'text' => $chat_id
-                        ]);
-                    }
                     break;
                 }
             }
