@@ -59,7 +59,7 @@ if ( app::access() ){
             exit("ACCESS GRANTED");
         }
     } // switch
-
+    exit();
 }
 
 exit('OK');
