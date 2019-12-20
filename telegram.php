@@ -44,6 +44,8 @@ class TelegramBot
             $text = $message['text'];
             $chat = $message['chat'];
             $chat_id = $chat['id'];
+            
+            $text = str_replace('@php_heroku_telegram_bot', '', $text);
 
             if (false && $from_id !== $chat_id){
                 $this->sendMessage([
