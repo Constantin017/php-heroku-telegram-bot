@@ -41,11 +41,6 @@ class TelegramBot
         return json_decode(file_get_contents("php://input"), true);
     }
 
-    private function isPrivateChat($from_id, $chat_id)
-    {
-        return ( $from_id === $chat_id  ) ? true : false;
-    }
-
     public function setAdmins(string $admin_list)
     {
         $this->admin_list = explode(';', $admin_list);
@@ -53,7 +48,7 @@ class TelegramBot
 
     public function isAdmin($user_id)
     {
-        if ( !empty($this->admin_list) )
+        if ( !empty($this->admin_list) && is_array($this->admin_list) )
         {
             return ( in_array($user_id, $this->admin_list) ) ? true : false;
         }
