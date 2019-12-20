@@ -85,9 +85,14 @@ class TelegramBot
             {
                 case '/whoami':
                 {
+                    $_text = "Your ID: ".$user_id;
+
+                    if ($this->isAdmin($from_id)){
+                        $_text = "You are admin and your ID: ".$user_id;
+                    }
                     $this->sendMessage([
                         'chat_id' => $chat_id,
-                        'text' => $from
+                        'text' => $_text
                     ]);
                     break;
                 }
