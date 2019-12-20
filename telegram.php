@@ -155,6 +155,10 @@ class TelegramBot
                 }
                 default:
                 {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $text
+                    ]);
                     break;
                 }
             }
