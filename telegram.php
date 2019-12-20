@@ -5,7 +5,7 @@ class TelegramBot
     private $name = '';
     private $admin_list = [];
 
-    public function __construct($bot_token, $bot_name)
+    public function __construct(string $bot_token, string $bot_name)
     {
         $this->uri = $this->uri . $bot_token;
         $this->name = $bot_name;
@@ -38,7 +38,7 @@ class TelegramBot
 
     public function filterText(string $text)
     {
-        return str_replace("@".$this->name, "", $text);
+        return str_replace($this->name, "", $text);
     }
 
     private function request()
@@ -78,19 +78,10 @@ class TelegramBot
             $chat = $message['chat'];
             $chat_id = $chat['id'];
 
-            // $text = $this->filterText($message['text']);
-            $text = str_replace("@php_heroku_telegram_bot", "", $message['text']);
+            $text = $this->filterText($message['text']);
 
             switch($text)
             {
-                case "/name":
-                {
-                    $this->sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => $this->getName()
-                    ]);
-                    break;
-                }
                 case '/whoami':
                 {
                     $_text = "Your ID: ".$user_id;
@@ -164,10 +155,6 @@ class TelegramBot
                 }
                 default:
                 {
-                    $this->sendMessage([
-                        'chat_id' => $chat_id,
-                        'text' => $text
-                    ]);
                     break;
                 }
             }
