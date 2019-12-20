@@ -54,11 +54,6 @@ if ( app::access() ){
             app::dump($result);
             break;
         }
-        case '/admins':
-        {
-            app::dump(explode(";", $bot_admin_list));
-            break;
-        }
         default:
         {
             echo 'ACCESS GRANTED';

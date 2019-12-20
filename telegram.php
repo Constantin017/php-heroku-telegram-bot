@@ -79,15 +79,6 @@ class TelegramBot
             $chat = $message['chat'];
             $chat_id = $chat['id'];
 
-            if ( $this->accessGroup() )
-            {
-                $this->sendMessage([
-                    'chat_id' => $chat_id,
-                    'text' => 'Working only on private chat.'
-                ]);
-                exit();
-            }
-
             $text = $this->filterText($message['text']);
 
             switch($text)
