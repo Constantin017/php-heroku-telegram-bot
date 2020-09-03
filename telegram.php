@@ -8,6 +8,9 @@ class TelegramBot
     public function __construct(string $bot_token, string $bot_name)
     {
         $this->uri = $this->uri . $bot_token;
+        if (strpos('@', $bot_name) !== 0) {
+            $bot_name = '@'.$bot_name;
+        }
         $this->name = $bot_name;
     }
 
@@ -56,13 +59,8 @@ class TelegramBot
             $message = $update['message'];
             
             $message_id = $message['message_id'];
-            
-            $from = $message['from'];
-            $from_id = $from['id'];
-            $user_id = $from['id'];
-
-            $chat = $message['chat'];
-            $chat_id = $chat['id'];
+            $from_id = $user_id = $message['from']['id'];
+            $chat_id = $message['chat']['id'];
 
             $text = $this->filterText($message['text']);
 
@@ -76,6 +74,14 @@ class TelegramBot
                         'text' => $_text
                     ]);
                     break;
+                }
+                case '/time':
+                {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => date('d.m.Y, H:i', time())
+                    ]);
+                    break;                    
                 }
                 case '/unixtime':
                 {
