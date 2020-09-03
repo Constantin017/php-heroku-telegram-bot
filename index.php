@@ -51,6 +51,13 @@ if ( app::access() ){
             app::dump($result);
             break;
         }
+        case '/deleteWebhook':
+            {
+                $telegram = new TelegramBot($bot_token, $bot_name);
+                $result = $telegram->deleteWebhook ();
+                app::dump($result);
+                break;
+            }
         case '/getUpdates':
         {
             $telegram = new TelegramBot($bot_token, $bot_name);
