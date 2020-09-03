@@ -8,15 +8,12 @@ $bot_token = getenv('TELEGRAM_BOT_TOKEN');
 $bot_name = getenv('TELEGRAM_BOT_NAME');
 $app_name = getenv('HEROKU_APP_NAME');
 
-$bot_admin_list = getenv('ADMIN_IDS');
-
 app::setName($app_name);
 app::setToken($bot_token);
 
 
 if ( $_SERVER['REQUEST_URI'] == '/'.$bot_token ){
     $telegram = new TelegramBot($bot_token, $bot_name);
-    $telegram->setAdmins($bot_admin_list);
     $telegram->serve();
     exit();
 }

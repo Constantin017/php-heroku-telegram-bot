@@ -46,20 +46,6 @@ class TelegramBot
         return json_decode(file_get_contents("php://input"), true);
     }
 
-    public function setAdmins(string $admin_list)
-    {
-        $this->admin_list = explode(';', $admin_list);
-    }
-
-    public function isAdmin($user_id)
-    {
-        if ( !empty($this->admin_list) && is_array($this->admin_list) )
-        {
-            return ( in_array($user_id, $this->admin_list) ) ? true : false;
-        }
-        return true;
-    }
-
     public function serve()
     {
 
@@ -129,13 +115,10 @@ class TelegramBot
                 }
                 case '/chat_id':
                 {
-                    if ( $this->isAdmin($user_id) ) {
-                        $this->sendMessage([
-                            'chat_id' => $chat_id,
-                            'text' => $chat_id
-                        ]);
-                    }
-                    break;
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => $chat_id
+                    ]);
                 }
                 case '/ping':
                 {   
