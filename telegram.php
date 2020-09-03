@@ -8,9 +8,6 @@ class TelegramBot
     public function __construct(string $bot_token, string $bot_name)
     {
         $this->uri = $this->uri . $bot_token;
-        if (strpos('@', $bot_name) !== 0) {
-            $bot_name = '@'.$bot_name;
-        }
         $this->name = $bot_name;
     }
 
@@ -66,6 +63,14 @@ class TelegramBot
 
             switch($text)
             {
+                case '/debug':
+                {
+                    $this->sendMessage([
+                        'chat_id' => $chat_id,
+                        'text' => json_encode($update)
+                    ]);
+                    break;
+                }
                 case '/whoami':
                 {
                     $_text = "Your ID: ".$user_id;
