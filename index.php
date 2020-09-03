@@ -51,6 +51,12 @@ if ( app::access() ){
             app::dump($result);
             break;
         }
+        case '/getUpdates':
+        {
+            $telegram = new TelegramBot($bot_token, $bot_name);
+            $result = $telegram->getUpdates();
+            app::dump($result);
+        }
         default:
         {
             exit("ACCESS GRANTED");
