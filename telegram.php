@@ -126,6 +126,7 @@ class TelegramBot
                         'chat_id' => $chat_id,
                         'text' => $chat_id
                     ]);
+                    break;
                 }
                 case '/ping':
                 {   
