@@ -14,11 +14,9 @@ php-heroku-telegram-bot
 - [x] Create heroku app.
 - [x] Create bot from [@BotFather][link-botfather]
 - [x] Set my logo as bot pic from [@BotFather][link-botfather]
-- [ ] Write about from [@BotFather][link-botfather]
-- [ ] Write description from [@BotFather][link-botfather]
 - [ ] Write how to use this app
 - [x] Describe available TelegramBot commands
-- [ ] Maybe some licensing ?
+- [x] Maybe some licensing ?
 
 ## Available TelegramBot commands
 

@@ -3,5 +3,10 @@
 	Deny from all
 </Files>
 
+<Files  ~ "\.md$">
+	Order allow,deny
+	Deny from all
+</Files>
+
 RewriteEngine on
 RewriteRule . index.php [L]

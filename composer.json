@@ -1,0 +1,14 @@
+{
+    "name": "constantin017/php-heroku-telegram-bot",
+    "description": "PHP + Herku + TelegramBot",
+    "type": "project",
+    "license": "MIT",
+    "authors": [{
+        "name": "Constantin",
+        "email": "konstantin4all@gmail.com"
+    }],
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    }
+}

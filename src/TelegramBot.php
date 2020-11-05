@@ -1,14 +1,15 @@
 <?php
+
+namespace Application;
+
 class TelegramBot
 {
     private $uri = 'https://api.telegram.org/bot';
     private $name = '';
-    private $admin_list = [];
 
-    public function __construct(string $bot_token, string $bot_name)
+    public function __construct(string $bot_token)
     {
         $this->uri = $this->uri . $bot_token;
-        $this->name = $bot_name;
     }
 
     public function __call($name, $args)
@@ -34,6 +35,11 @@ class TelegramBot
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setName(string $name)
+    {
+        return $this->name = $name;
     }
 
     public function filterText(string $text)
